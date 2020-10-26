@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void initDailys() {
         this.dailyList.clear();
-        Cursor cursor = db.query("daily", new String[]{"title","content","datetime","username","id"}, null, null, null, null, null);
+        Cursor cursor = db.query("daily", new String[]{"title","content","datetime","username","id"}, null, null, null, null, "datetime desc");
         //利用游标遍历所有数据对象
         //为了显示全部，把所有对象连接起来，放到TextView中
         while(cursor.moveToNext()){
@@ -124,5 +124,7 @@ public class MainActivity extends AppCompatActivity {
             daily.setId(cursor.getInt(cursor.getColumnIndex("id")));
             dailyList.add(daily);
         }
+        cursor.close();
+        db.close();
     }
 }

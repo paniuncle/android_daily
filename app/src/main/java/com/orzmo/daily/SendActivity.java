@@ -37,7 +37,8 @@ public class SendActivity extends AppCompatActivity {
         this.db = databaseHelper.getWritableDatabase();
 
         this.id = String.valueOf(getIntent().getStringExtra("id"));
-        if (!this.id.equals("")) {
+
+        if (!this.id.equals("null")) {
             getData(this.id);
             this.isEdit = true;
         }
@@ -104,11 +105,14 @@ public class SendActivity extends AppCompatActivity {
         }
 
 
+
         Toast toast = Toast.makeText(SendActivity.this, "更新/发布成功！", Toast.LENGTH_LONG);
         toast.show();
 
         Intent intent = new Intent(SendActivity.this, MainActivity.class);
         startActivity(intent);
+
+
 
 
     }
