@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,6 +51,19 @@ public class ReadActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ReadActivity.this, SendActivity.class);
                 intent.putExtra("id", String.valueOf(daily.getId()));
+                startActivity(intent);
+            }
+        });
+
+        Button delete = (Button) findViewById(R.id.button_delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.delete("daily","id = ?",new String[]{String.valueOf(daily.getId())});
+                Toast toast = Toast.makeText(ReadActivity.this, "删除成功！", Toast.LENGTH_LONG);
+                toast.show();
+
+                Intent intent = new Intent(ReadActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

@@ -59,8 +59,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        initDailys();
 
+        DatabaseHelper databaseHelper = new DatabaseHelper(this,"daily_db",null,1);
+        this.db = databaseHelper.getWritableDatabase();
+
+        initDailys();
         DailyAdapter dailyAdapter = new DailyAdapter(MainActivity.this, R.layout.item, dailyList);
         ListView listView = (ListView) this.findViewById(R.id.list_view);
         listView.setAdapter(dailyAdapter);
@@ -108,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("username", username);
         editor.commit();
+
+//        initDailys();
 
     }
     private void initDailys() {
